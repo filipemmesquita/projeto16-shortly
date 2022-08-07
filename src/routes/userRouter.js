@@ -8,4 +8,5 @@ const userRouter = Router();
 userRouter.post("/signup",validateSignUp, signUpUser);
 userRouter.post("/signin",validateSignIn, signInUser);
 
+
 export default userRouter;
