@@ -1,0 +1,29 @@
+{
+  "name": "projeto16-shortly",
+  "version": "1.0.0",
+  "description": "an API for a link shortener",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "test": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/filipemmesquita/projeto16-shortly.git"
+  },
+  "author": "Filipe Mesquita",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/filipemmesquita/projeto16-shortly/issues"
+  },
+  "homepage": "https://github.com/filipemmesquita/projeto16-shortly#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "nodemon": "^2.0.19",
+    "pg": "^8.7.3"
+  }
+}
