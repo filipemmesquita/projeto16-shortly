@@ -23,8 +23,15 @@ async function updateCount(shortUrl,currentCount){
     UPDATE urls SET "visitCount" = $2 WHERE "shortUrl"=$1
     `,[shortUrl,Number(newCount)]);
 }
+async function getUrl(urlId){
+    const {rows: entry} = await connection.query(`
+    SELECT id,"shortUrl",url FROM urls WHERE id=$1
+    `,[urlId])
+    return entry[0];
+}
 export const urlRepository = {
     newShortUrl,
     openUrl,
-    updateCount
+    updateCount,
+    getUrl
 }
