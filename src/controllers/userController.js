@@ -39,3 +39,9 @@ export async function signInUser(req,res){
         res.sendStatus(500);
     }
 }
+export async function getUser(req,res){
+    const userId=res.locals.userId;
+    const user=await userRepository.getUser(userId);
+    
+    res.status(200).send(user);
+}
