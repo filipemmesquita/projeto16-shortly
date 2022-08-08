@@ -1,0 +1,285 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.11 (Ubuntu 12.11-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.11 (Ubuntu 12.11-0ubuntu0.20.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: sessions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.sessions (
+    id integer NOT NULL,
+    token text NOT NULL,
+    "userId" integer NOT NULL,
+    "createdAt" date DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE public.sessions OWNER TO postgres;
+
+--
+-- Name: public.sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."public.sessions_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."public.sessions_id_seq" OWNER TO postgres;
+
+--
+-- Name: public.sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."public.sessions_id_seq" OWNED BY public.sessions.id;
+
+
+--
+-- Name: urls; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.urls (
+    id integer NOT NULL,
+    url text,
+    "shortUrl" text NOT NULL,
+    "visitCount" integer DEFAULT 0 NOT NULL,
+    "creatorId" integer NOT NULL,
+    "createdAt" date DEFAULT '2022-08-06'::date NOT NULL
+);
+
+
+ALTER TABLE public.urls OWNER TO postgres;
+
+--
+-- Name: urls_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.urls_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.urls_id_seq OWNER TO postgres;
+
+--
+-- Name: urls_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.urls_id_seq OWNED BY public.urls.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    name text NOT NULL,
+    email text NOT NULL,
+    password text NOT NULL,
+    "createdAt" date DEFAULT '2022-08-06'::date NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: sessions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sessions ALTER COLUMN id SET DEFAULT nextval('public."public.sessions_id_seq"'::regclass);
+
+
+--
+-- Name: urls id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.urls ALTER COLUMN id SET DEFAULT nextval('public.urls_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.sessions (id, token, "userId", "createdAt") FROM stdin;
+1	540285e0-462a-4db4-b305-958a5c1a6da6	11	2022-08-07
+2	322fa7ec-8259-4742-bde4-0033c0c14b4c	12	2022-08-07
+3	7468c296-55c1-496f-b96d-36d5716474ee	13	2022-08-08
+\.
+
+
+--
+-- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.urls (id, url, "shortUrl", "visitCount", "creatorId", "createdAt") FROM stdin;
+5	https://www.youtube.com/watch?v=llqWTJGUFeE	VqVwqk-4_MkgrfIdP8sUr	5	11	2022-08-06
+8	https://www.nyan.cat/	o6nz5WXkuSO6n3ISaeOq0	1	11	2022-08-06
+9	https://www.w3schools.com/jsref/jsref_map.asp	Wj_I_HMHlTQoUNnar4g7y	1	12	2022-08-06
+10	https://www.devmedia.com.br/trabalhando-com-subqueries/40134	0XH7d4Bv_1L7O8GFicQck	0	13	2022-08-06
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users (id, name, email, password, "createdAt") FROM stdin;
+11	João	joao@driven.com	$2b$10$GUcONcQnN6670X8BBwrUj.xoPSWscc5dexTmUrXiMSgaHCncCPD0G	2022-08-06
+12	Maria	maria@driven.com	$2b$10$/bOsvM9FFWQ8Ibd7g5UB..DybGVP1xdXWn7C2kl42wsEq0sefV8BS	2022-08-06
+13	Paulo	paulo@driven.com	$2b$10$srx/zt8tggfOx6R3pi9A8.z3yYO9JBeU8aVqP/K2Gy9Sy0ez8WW/6	2022-08-06
+\.
+
+
+--
+-- Name: public.sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."public.sessions_id_seq"', 3, true);
+
+
+--
+-- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.urls_id_seq', 10, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 13, true);
+
+
+--
+-- Name: sessions public.sessions_token_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sessions
+    ADD CONSTRAINT "public.sessions_token_key" UNIQUE (token);
+
+
+--
+-- Name: sessions sessions_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sessions
+    ADD CONSTRAINT sessions_pk PRIMARY KEY (id);
+
+
+--
+-- Name: urls urls_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.urls
+    ADD CONSTRAINT urls_pk PRIMARY KEY (id);
+
+
+--
+-- Name: urls urls_shortUrl_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.urls
+    ADD CONSTRAINT "urls_shortUrl_key" UNIQUE ("shortUrl");
+
+
+--
+-- Name: urls urls_url_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.urls
+    ADD CONSTRAINT urls_url_key UNIQUE (url);
+
+
+--
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
+
+
+--
+-- Name: users users_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pk PRIMARY KEY (id);
+
+
+--
+-- Name: urls urls_creatorId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.urls
+    ADD CONSTRAINT "urls_creatorId_fkey" FOREIGN KEY ("creatorId") REFERENCES public.users(id);
+
+
+--
+-- Name: urls urls_fk0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.urls
+    ADD CONSTRAINT urls_fk0 FOREIGN KEY ("creatorId") REFERENCES public.users(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

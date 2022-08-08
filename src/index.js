@@ -17,5 +17,5 @@ server.use(userRouter);
 server.use(urlRouter);
 server.use(rankRouter);
 
-const PORT = process.env.PORT || 4000;
-server.listen(PORT, () => console.log('Server Online'));
+const PORT = process.env.PORT;
+server.listen(PORT, () => console.log('Server Online on port '+process.env.PORT));
