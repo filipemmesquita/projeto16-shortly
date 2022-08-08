@@ -17,28 +17,28 @@ async function newSession(token,userId){
 }
 async function getUser(userId){
     const {rows:user} = await connection.query(`
-SELECT 
-	users.id, 
-	users.name, 
-	urls.id AS "urlId", 
-	urls."shortUrl", 
-	urls.url, 
-	urls."visitCount",
-	(SELECT 
-	 	SUM(urls."visitCount")
-    FROM 
-		users 
-	 	JOIN urls ON users.id="creatorId" 
-	WHERE 
-	 	users.id=$1
-    GROUP BY 
-	 	users.id
-	) AS "totalCount"
-FROM 
-    users 
-    JOIN urls ON users.id = urls."creatorId"
-WHERE 
-    users.id=$1;
+        SELECT 
+            users.id, 
+            users.name, 
+            urls.id AS "urlId", 
+            urls."shortUrl", 
+            urls.url, 
+            urls."visitCount",
+            (SELECT 
+                SUM(urls."visitCount")
+            FROM 
+                users 
+                JOIN urls ON users.id="creatorId" 
+            WHERE 
+                users.id=$1
+            GROUP BY 
+                users.id
+            ) AS "totalCount"
+        FROM 
+            users 
+            JOIN urls ON users.id = urls."creatorId"
+        WHERE 
+            users.id=$1;
     `,[userId]);
     const userObject={
         id:user[0].id,

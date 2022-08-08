@@ -18,7 +18,6 @@ async function openUrl(shortUrl){
 }
 async function updateCount(shortUrl,currentCount){
     const newCount=currentCount+1;
-    console.log(newCount)
     connection.query(`
     UPDATE urls SET "visitCount" = $2 WHERE "shortUrl"=$1
     `,[shortUrl,Number(newCount)]);

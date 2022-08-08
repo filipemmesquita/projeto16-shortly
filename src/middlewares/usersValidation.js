@@ -32,7 +32,6 @@ export default async function validateSignUp(req, res, next) {
       return res.sendStatus(422);
     }
     const validate=userSchema.validate({name: name, email: email, password:password,confirmPassword:confirmPassword}, {abortEarly:false});
-    console.log(validate);
     if(validate.error){
     return res.status(422).send(validate.error.details)
     }

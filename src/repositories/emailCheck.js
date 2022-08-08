@@ -6,9 +6,7 @@ export default async function emailCheck(value){
     `,[value]);
     
     if(alreadyExist.length>0){
-        console.log(alreadyExist)
         return true;
     }
-    console.log(alreadyExist)
     return false;
 }

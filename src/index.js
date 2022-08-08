@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 
 import userRouter from './routes/userRouter.js'
 import urlRouter from "./routes/urlRouter.js";
+import rankRouter from "./routes/rankinRouter.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ server.use(express.json());
 
 server.use(userRouter);
 server.use(urlRouter);
+server.use(rankRouter);
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => console.log('Server Online'));
