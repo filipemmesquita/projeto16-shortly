@@ -24,13 +24,19 @@ async function updateCount(shortUrl,currentCount){
 }
 async function getUrl(urlId){
     const {rows: entry} = await connection.query(`
-    SELECT id,"shortUrl",url FROM urls WHERE id=$1
+    SELECT id,"shortUrl",url,"creatorId" FROM urls WHERE id=$1
     `,[urlId])
     return entry[0];
+}
+async function deleteUrl(urlId){
+    await connection.query(`
+    DELETE FROM urls WHERE id=$1
+    `,[urlId])
 }
 export const urlRepository = {
     newShortUrl,
     openUrl,
     updateCount,
-    getUrl
+    getUrl,
+    deleteUrl
 }

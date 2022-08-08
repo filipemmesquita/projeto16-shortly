@@ -28,7 +28,6 @@ async function rankUsers(){
         ORDER BY "visitCount" DESC, "linksCount" DESC
         LIMIT 10;
     `);
-    console.log(ranking);
     return ranking;
 }
 
